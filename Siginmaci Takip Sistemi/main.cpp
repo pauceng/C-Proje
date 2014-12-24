@@ -14,6 +14,7 @@
 int d_control();
 void Siginmaci_Kayit();
 bool d_sayi_control(char* x);
+bool d_harf_control(char* x);
 void Bubble_sort(struct User siginmaci[], int num);
 int d_count(char dizi[]);
 void menu_Giris();
@@ -51,6 +52,7 @@ int main() {
 	printf("==================================================================\n");
 	printf("\t\t\tSiginmaci Takip SisTemi\n");
 	printf("==================================================================\n");
+	Memur_Kayit();
 	menu_Giris();
 	return 0;
 }
@@ -105,147 +107,182 @@ void menu_Giris() {
 	} while (!d_sayi_control(secim) || secim[i] != '2' || secim[i] != '1');
 
 }
-//Siginmaci Kayit
+//Siginmaci Kayit fonksiyonu
 void Siginmaci_Kayit() {
 int i=0; int indis=0;
 	char secim[10];
-	
-		
-	//	indis = d_control();
-	//	if (indis < 0) {
-	//		printf("\tListe Dolu!\n");
-	//		return;
-	//} else {
-	do {	
-		printf("Siginmaci Kayit Sistemi...\n====================================================>\n");
-		printf("Siginmaci Ad              : ");
-		scanf("%15s",siginmaci[indis].ad);
-		printf("Siginmaci Soyad           : ");
-		scanf("%15s",siginmaci[indis].soyad);
-		printf("\n%d\n",indis);
-		/*
-		printf("Dogum tarihi.(gun.ay.yil) : ");
-		do {
-			gets(siginmaci[indis].dogum_tarihi);
-		} while (!d_sayi_control(siginmaci[indis].dogum_tarihi) && !strpbrk(siginmaci[indis].dogum_tarihi, "."));
-		
-		printf("Siginmaci Dogum Yeri       : ");
-		gets( siginmaci[indis].dogum_yeri);
-		printf("Siginmaci Cinsiyyet        : ");
-		gets(siginmaci[indis].cinsiyet);
-		printf("Siginmaci Uyruk            : ");
-		gets(siginmaci[indis].uyruk);
-		printf("Siginmaci Meslegini        : ");
-		scanf("%10s",siginmaci[indis].meslek);
-		printf("Siginmaci Egitim Durumu    : ");
-		scanf("%10s",siginmaci[indis].egitim_durumu);
-		printf("Siginmaci Yerlesdigi Yer   : ");
-		gets(siginmaci[indis].adres);
-		printf("Siginmaci Geldigi Sehir    : ");
-		scanf("%20s",+
-			siginmaci[indis].geldigi_sehir);
-		
-		do { //tarih formatinda oldugunu kontrol ediyoruz
-			printf("S.Gelis Tarihi (gun.ay.yil): ");
-			gets(siginmaci[indis].gelis_tarihi);
-		} while (!d_sayi_control(siginmaci[indis].gelis_tarihi) && !strpbrk(siginmaci[indis].gelis_tarihi, "."));
+	indis = d_control();
+	if (indis < 0) {
+		printf("\tListe Dolu!\n");
+		return; 
+	} else {
+		printf("\t\tSiginmaci Kayit Sistemi...\n");
+		do {	
+			printf("\n============{ Yeni Siginmaci icin bilgileri giriniz }============\n\n");
+			do {
+				printf("Siginmaci Ad              : ");
+				scanf("%15s", siginmaci[indis].ad);
+			} while (!d_harf_control(siginmaci[indis].ad));
+			do {
+				printf("Siginmaci Soyad           : ");
+				scanf("%15s",siginmaci[indis].soyad);
+			} while (!d_harf_control(siginmaci[indis].soyad));
+			do {
+				printf("Dogum tarihi.(gun.ay.yil) : ");
 
-		do {
-			printf("Siginmaci email adress    : ");
-			gets(siginmaci[indis].eposta);
-		} while (!strpbrk(siginmaci[indis].eposta, "@"));
-		do {
-			printf("Siginmaci Telefon(10 Hane!): ");
-			gets(siginmaci[indis].telefon);
-			if (! (d_sayi_control(siginmaci[indis].telefon) && sizeof(siginmaci[indis].telefon) == d_count(siginmaci[indis].telefon))) {
-				printf("\t\tHatali Giris...!\n\tLutfen 10 Haneli Rakam Girdiniz...!\n");
-			}
-		} while (!d_sayi_control(siginmaci[indis].telefon) || d_count(siginmaci[indis].telefon) != sizeof(siginmaci[indis].telefon));
-		*/
-		do {
-			printf("\tBaska Kayit Yapilacak mi? (E/h): ");
-			//scanf("%s", secim);
-			getchar();
-			secim[i] = (char) getchar();
-			/*if (secim[i] != 'E' && secim[i] != 'e') {
+				gets(siginmaci[indis].dogum_tarihi);
+			} while (!d_sayi_control(siginmaci[indis].dogum_tarihi) && !strpbrk(siginmaci[indis].dogum_tarihi, "."));
+			do {
+				printf("Siginmaci Dogum Yeri       : ");
+				gets( siginmaci[indis].dogum_yeri);
+			} while (!d_harf_control(siginmaci[indis].dogum_yeri));
+			do
+			{
+				printf("Siginmaci Cinsiyyet        : ");
+				gets(siginmaci[indis].cinsiyet);
+			} while (!d_harf_control(siginmaci[indis].cinsiyet));
+			do
+			{
+				printf("Siginmaci Uyruk            : ");
+				gets(siginmaci[indis].uyruk);
+			} while (!d_harf_control(siginmaci[indis].uyruk));
+			do
+			{
+				printf("Siginmaci Meslegini        : ");
+				scanf("%10s",siginmaci[indis].meslek);
+			} while (!d_harf_control(siginmaci[indis].meslek));
+			do
+			{
+				printf("Siginmaci Egitim Durumu    : ");
+				scanf("%10s",siginmaci[indis].egitim_durumu);
+			} while (!d_harf_control(siginmaci[indis].egitim_durumu));
+			do
+			{
+				printf("Siginmaci Yerlesdigi Yer   : ");
+				gets(siginmaci[indis].adres);
+			} while (!d_harf_control(siginmaci[indis].adres));
+			do
+			{
+				printf("Siginmaci Geldigi Sehir    : ");
+				scanf("%20s",siginmaci[indis].geldigi_sehir);
+			} while (!d_harf_control(siginmaci[indis].geldigi_sehir));
+			do { //tarih formatinda oldugunu kontrol ediyoruz
+				getch();
+				printf("S.Gelis Tarihi (gun.ay.yil): ");
+				gets(siginmaci[indis].gelis_tarihi);
+			} while (!d_sayi_control(siginmaci[indis].gelis_tarihi) && !strpbrk(siginmaci[indis].gelis_tarihi, "."));
+			do {
+				printf("Siginmaci email adress    : ");
+				gets(siginmaci[indis].eposta);
+			} while (!strpbrk(siginmaci[indis].eposta, "@") || !strpbrk(siginmaci[indis].eposta, ".") || !strpbrk(siginmaci[indis].eposta, "\n"));
+			do {
+				printf("Siginmaci Telefon(10 Hane!): ");
+				gets(siginmaci[indis].telefon);
+				if (! (d_sayi_control(siginmaci[indis].telefon) && sizeof(siginmaci[indis].telefon) == d_count(siginmaci[indis].telefon))) {
+					printf("\t\tHatali Giris...!\n\tLutfen 10 Haneli Rakam Girdiniz...!\n");
+				}
+			} while (!d_sayi_control(siginmaci[indis].telefon) || d_count(siginmaci[indis].telefon) != sizeof(siginmaci[indis].telefon));
+		
+			printf("\n============\nToplam : %d\n============\n",indis+1);
+			do {
+				printf("\nDiske Kayd etmek icin < k > --->{ Baska Kayit Yapilacak mi(E/h) ?: ");
+				secim[i] = getch();
+				/*if (secim[i] != 'E' && secim[i] != 'e') {
 				printf("\tHatali Giris...!\nSeciminiz: ");
 			}*/
-			if (secim[i] ==  'h' || secim[i] == 'H') {
-				dosya_S_Ekle(indis);
-				exit(false);
-			}
-		} while (secim[i] != 'E' && secim[i] != 'e');
-		indis++;
-	} while (secim[i] == 'E' || secim[i] == 'e' || secim[i] != 'h' || secim[i] != 'H');
-
+				if (secim[i] ==  'h' || secim[i] == 'H') {
+					exit(false);
+				}
+				if (secim[i] == 'k' ||secim[i] == 'K') {
+					dosya_S_Ekle(indis);
+				}
+			} while (secim[i] != 'E' && secim[i] != 'e');
+			indis++;
+			system("cls");
+		} while (secim[i] == 'E' || secim[i] == 'e' || secim[i] != 'h' || secim[i] != 'H');
+	}
 }
 //
 void Memur_Kayit() {
 	int  indis,i=0;
 	char secim[10];
-
-	do {
-		
-		indis = d_control();
-		if (indis < 0) {
-			printf("\tListe Dolu!\n");
-			return;
-		}
-		printf("\t...Kullanici Kayit Sistemi...\n=============================================>\n");
-		printf("Kullanici Ad              : ");
-		scanf("%15s",Memur[indis].ad);
-		printf("Kullanici Soyad           : ");
-		scanf("%15s", Memur[indis].soyad);
-		printf("Kullanici Adress          : ");
-		scanf("%15s", Memur[indis].adres);
-		do {
-			printf("Kullanici TC (11 Hane): ");
-			scanf("%13s", Memur[indis].tc);
-			if (d_count(Memur[indis].tc) != sizeof(Memur[indis].tc) || ! d_sayi_control(Memur[indis].tc)) {
-				printf("\t\tHatali Giris...!\n\tLutfen 11 Haneli Rakam Girdiniz...!\n");
-			}
-		} while (!d_sayi_control(Memur[indis].tc) || d_count(Memur[indis].tc) != sizeof(Memur[indis].tc));
-		printf("Kullanici kullanici adi   : ");
-		scanf("%10s",Memur[indis].kullanici_adi);
-		printf("Kullanici sifre          : ");
-		scanf("%10s",Memur[indis].sifre);
-		printf("Kullanici Yetki Turu     : ");
-		scanf("%10s",Memur[indis].yetki_turu);
-		do {
-			printf("Kullanici Telefon(10 Hane!): ");
-			//getchar();
-			//siginmaci[indis].telefon[i] = getchar();
-			scanf("%12s",Memur[indis].telefon);
-			if (d_count(Memur[indis].telefon) != sizeof(Memur[indis].telefon) || !d_sayi_control(Memur[indis].telefon)) {
-				printf("\t\tHatali Giris...!\n\tLutfen 10 Haneli Rakam Girdiniz...!\n");
-			}
-		} while (!d_sayi_control(Memur[indis].telefon) || d_count(Memur[indis].telefon) != sizeof(Memur[indis].telefon));
-		do { //tarih formatýný doðruluðunu kontrol ediyoruz
-			printf("S.Gelis Tarihi(gun.ay.yil): ");
-			scanf("%10s",Memur[indis].gelis_tarihi);
-		} while (Memur[indis].gelis_tarihi[2] != '.' && Memur[indis].gelis_tarihi[5] !='.' && !d_sayi_control(Memur[indis].gelis_tarihi));
-		do {
-			printf("Kullanici email adress    : ");
-			scanf("%15s",Memur[indis].eposta);
-			//getchar();
-			//Memur[indis].eposta = getchar();
-		} while (!strpbrk(Memur[indis].eposta, "@")); //@ karakterinin dizi icinde kontrol
-		
-		do {
-			printf("\tBaska Kayit Yapilacak mi? (E/h): ");
-			//scanf("%s", secim);
-			getchar();
-			secim[i] = (char) getchar();
-			/*
-			if (secim[i] != 'E' && secim[i] != 'e') {
-				printf("\tHatali Giris...!\nSeciminiz: ");
-			}*/
-		
-			if (secim[i] ==  'h' || secim[i] == 'H')
-				exit(false);
-		} while (secim[i] != 'E' && secim[i] != 'e');
-
-	} while (secim[i] == 'E' || secim[i] == 'e' || secim[i] != 'h' || secim[i] != 'H');
+	indis = d_control();
+	if (indis < 0) {
+		printf("\tListe Dolu!\n");
+		return; 
+	} else {
+		printf("\t...Kullanici Kayit Sistemi...\n");
+		/*do {
+			printf("\n============{ Yeni Kullanici icin bilgileri giriniz }============\n\n");
+			do
+			{
+				printf("Kullanici Ad              : ");
+				scanf("%s",Memur[indis].ad);
+			} while (!d_harf_control(Memur[indis].ad));
+			do
+			{
+				printf("Kullanici Soyad           : ");
+				scanf("%s", Memur[indis].soyad);
+			} while (!d_harf_control(Memur[indis].soyad));
+			do
+			{
+				printf("Kullanici Adress          : ");
+				scanf("%s",Memur[indis].adres);
+			} while (!d_harf_control(Memur[indis].adres));
+			do {
+				printf("Kullanici TC (11 Hane)    : ");
+				scanf("%s", Memur[indis].tc);
+				if (d_count(Memur[indis].tc) != sizeof(Memur[indis].tc) || ! d_sayi_control(Memur[indis].tc)) {
+					printf("\t\tHatali Giris...!\n\tLutfen 11 Haneli Rakam Girdiniz...!\n");
+				}
+			} while (!d_sayi_control(Memur[indis].tc) || d_count(Memur[indis].tc) != sizeof(Memur[indis].tc));
+			printf("Kullanici kullanici adi   : ");
+			scanf("%s",Memur[indis].kullanici_adi);
+			printf("Kullanici sifre           : ");
+			scanf("%s",Memur[indis].sifre);*/
+			do 
+			{
+				printf("Kullanici Yetki Turu      : ");
+				//scanf("%10s",Memur[indis].yetki_turu);
+				gets(Memur[indis].yetki_turu);
+				if ( (strcmp(Memur[indis].yetki_turu,"admin")) || (strcmp(Memur[indis].yetki_turu,"memur"))) {
+					printf("Hatali ...! { admin ve ya memur }\n");
+				}
+			} while( Memur[indis].yetki_turu !="admin" && Memur[indis].yetki_turu !="memur");
+			do 
+			{
+				printf("Kullanici Telefon(10 Hane): ");
+				scanf("%12s",Memur[indis].telefon);
+				if (d_count(Memur[indis].telefon) != sizeof(Memur[indis].telefon) || !d_sayi_control(Memur[indis].telefon)) {
+					printf("\t\tHatali Giris...!\n\tLutfen 10 Haneli Rakam Girdiniz...!\n");
+				}
+			} while (!d_sayi_control(Memur[indis].telefon) || d_count(Memur[indis].telefon) != sizeof(Memur[indis].telefon));
+			do 
+			{ //tarih formatýný doðruluðunu kontrol ediyoruz
+				printf("S.Gelis Tarihi(gun.ay.yil): ");
+				scanf("%10s",Memur[indis].gelis_tarihi);
+			} while (!strpbrk(siginmaci[indis].gelis_tarihi, ".") && !d_sayi_control(Memur[indis].gelis_tarihi));
+			do {
+				printf("Kullanici email adress    : ");
+				scanf("%s",Memur[indis].eposta);
+			} while (!strpbrk(Memur[indis].eposta, "@") || !strpbrk(Memur[indis].eposta, ".")); //@ karakterinin dizi icinde kontrol
+			printf("\n============\nToplam: %d\n============\n",indis+1);
+			do {
+				printf("\nDiske Kayd etmek icin < k > --->{ Baska Kayit Yapilacak mi (E/h) ?: ");
+				secim[i] = getch();
+				//if (secim[i] != 'E' && secim[i] != 'e') {
+				//	printf("\tHatali Giris...!\nSeciminiz: ");
+				//}
+				if (secim[i] ==  'h' || secim[i] == 'H') {
+					exit(false);}
+				if (secim[i] == 'k' ||secim[i] == 'K') {
+					dosya_M_Ekle(indis);
+				}
+			} while (secim[i] != 'E' && secim[i] != 'e');
+			indis++;
+			system("cls");
+		} while (secim[i] == 'E' || secim[i] == 'e' || secim[i] != 'h' || secim[i] != 'H');
+	}
 }
 //
 void Bubble_sort(struct User siginmaci[], int num) {
@@ -265,7 +302,7 @@ void Bubble_sort(struct User siginmaci[], int num) {
 
 int d_control() {
 	int bos;
-	for (bos = 0; siginmaci[bos].ad[0] && Memur[bos].ad[0] && bos < MAX; bos++);
+	for (bos = 0; siginmaci[bos].no && Memur[bos].no && bos < MAX; bos++);
 	if (bos < MAX) {
 		return bos;
 	}
@@ -300,6 +337,25 @@ bool d_sayi_control(char* x) {
 	} while (x[i] != '\0');
 	return Checked;
 }
+//Girilenin Harf olup olmadýðýný kontrol eder.
+bool d_harf_control(char* x) {
+	bool Checked = true;
+	int i = 0;
+	for (i = 0; i < sizeof(x); i++) {
+		do {	  //girilen harf mi?
+			if (isalpha(x[i])) {
+				i++;
+				Checked = true;
+			}
+			else {
+				i++;
+				Checked = false;
+				break;
+			}
+		} while (x[i] != '\0');
+	}
+	return Checked;
+}
 //
 void menu_Admin( ){
 	char secim[15]; int i = 0;
@@ -310,8 +366,8 @@ void menu_Admin( ){
 	printf("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
 	printf("|    Kullanici Islemleri       |   Siginmaci Islemleri         |\n");
 	printf("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
-	printf("\t'                               ' \n");
-	printf("\t'-->Kullanici Islemleri (k)     '--> Siginmaci Islemleri (s)\n");
+	printf("  '                                  ' \n");
+	printf("  '-->Kullanici Islemleri (k)        '--> Siginmaci Islemleri (s)\n");
 	printf("\t\t'-->  1. Ekle.                '-->  1. Ekle.\n");
 	printf("\t\t'-->  2. Silme.               '-->  2. Silme.\n");
 	printf("\t\t'-->  3. Guncelle.            '-->  3. Guncelleme.\n");
@@ -415,32 +471,37 @@ void dosya_S_Ekle(int Sayi) {
 		printf("Dosya acilamadi...!!!!!!\n");	
 		return;
 	}
-		puts("Kayit zamani...!\n");
-		for (i = 0; i < Sayi; i++){
-			if (siginmaci[i].ad[0])
-				fprintf(di, "%3.d. %.10s %10s \n", count, siginmaci[i].ad, siginmaci[i].soyad);
-				count++;
-				siginmaci[i].no = count;
-				//printf(" Count: %d - NO: %d\n",count,siginmaci[i].no);
-		}
-		
+	fprintf(di,"\t\t\t\t\t\t...Siginmaci Kayitlari...\n________________________________________________________________________________________________________________________________________\n");
+	fprintf(di," No |\tAd\t\t|\tSoyad\t\t|\t\t\t|\t\t\t|\t\t\t|\n");
+	fprintf(di,"________________________________________________________________________________________________________________________________________\n");
+	printf("\n\n----------------------------------------------------\n\t--{ %d Siginmaci Kayd edildi...!}--\n----------------------------------------------------\n", Sayi+1);
+	for (i = 0; i <= Sayi; i++){
+		if (siginmaci[i].ad[0])
+			fprintf(di, "%3.d |%15s |%15s|\n", count, siginmaci[i].ad, siginmaci[i].soyad);
+			count++;
+			siginmaci[i].no = count;
+			//printf(" Count: %d - NO: %d\n",count,siginmaci[i].no);
+	}	
 	fclose(di);
 }
-//
-void dosya_S_Ekle(int Sayi) {
+//Memur yeni kayit islemi
+void dosya_M_Ekle(int Sayi) {
 	FILE *di;
-	int i =0, count = 1; siginmaci[i].no = 1;
+	int i =0, count = 1; Memur[i].no = 1;
 	if((di = fopen("Kullanici.txt", "a")) == NULL){
 		printf("Dosya acilamadi...!!!!!!\n");	
 		return;
 	}
-		puts("Kayit zamani...!\n");
-		for (i = 0; i < Sayi; i++){
-			if (Memur[i].ad[0])
-				fprintf(di, "%3.d. %.10s %10s \n", count, Memur[i].ad, Memur[i].soyad);
-				count++;
-				Memur[i].no = count;
-				//printf(" Count: %d - NO: %d\n",count,Memur[i].no);
-		}
+	printf("\n\n----------------------------------------------------\n\t--{ %d Kullanici Kayd edildi...!}--\n----------------------------------------------------\n", Sayi+1);
+	fprintf(di,"\t\t\t\t\t\t...Kullanici Kayitlari...\n________________________________________________________________________________________________________________________________________\n");
+	fprintf(di," No |\tAd    \t|\tSoyad\t|\t\t\t|\t\t\t|\t\t\t|\n");
+	fprintf(di,"________________________________________________________________________________________________________________________________________\n");
+	for (i = 0; i <= Sayi; i++){
+		if (Memur[i].ad[0])
+			fprintf(di,"%3.d |%15s |%15s|\n", count, Memur[i].ad, Memur[i].soyad);
+			count++;
+			Memur[i].no = count;
+			//printf(" Count: %d - NO: %d\n",count,Memur[i].no);
+	}
 	fclose(di);
 }
